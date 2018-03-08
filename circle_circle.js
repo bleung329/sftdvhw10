@@ -1,8 +1,8 @@
 /*
-  Team Helibnul - Ibnul Jahan and Charles Weng
+  Team Helibnul - Ibnul Jahan and Brian Leung
   SoftDev2 pd7
-  #09: Ask Circles [Change || Die]
-  2018-3-7
+  #10: Objectification
+  2018-03-09
 */
 
 
@@ -36,18 +36,29 @@ const clear = function(){
     pic.firstChild.remove();
 }
 
+
+var display = function(){
+    pic.appendChild(this);
+}
+
 // draw circle (inialization function)
 const circle = function(x, y){
-  var cir = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-  cir.setAttribute("cx", x);
-  cir.setAttribute("cy", y);
-  cir.setAttribute("r", radius);
-  cir.setAttribute("fill", fColor);
-  cir.setAttribute("stroke", sColor);
-  cir.addEventListener("click", changeC);
-  cir = pic.appendChild(cir);
-  console.log(pic);
+    var cir = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    cir.setAttribute("cx", x);
+    cir.setAttribute("cy", y);
+    cir.setAttribute("r", radius);
+    cir.setAttribute("fill", fColor);
+    cir.setAttribute("stroke", sColor);
+    cir.display =  display;
+    cir.display();
+    cir.addEventListener("click", changeC);
+    console.log(pic);
 }
+
+var initRadius = 10;
+
+    
+    
 
 // changes the circle color (secondary function)
 const changeC = function(e){
