@@ -1,5 +1,5 @@
 /*
-  Team Helibnul - Ibnul Jahan and Brian Leung
+  Team Ibbrian - Ibnul Jahan and Brian Leung
   SoftDev2 pd7
   #10: Objectification
   2018-03-09
@@ -49,7 +49,26 @@ const circle = function(x, y){
     cir.setAttribute("r", radius);
     cir.setAttribute("fill", fColor);
     cir.setAttribute("stroke", sColor);
-    cir.display =  display;
+    
+    cir.display =  function(){
+	pic.appendChild(this)
+    };
+    cir.setX = function(x){
+	return cir.setAttribute("cx", x);
+    }
+    cir.setY = function(y){
+	return cir.setAttribute("cy", y);
+    }
+    cir.setColor = function(col) {
+	return cir.setAttribute("fill", col);
+    };
+    cir.getColor = function() {
+	return cir.getAttribute("fill");
+    };
+    
+    
+
+    
     cir.display();
     cir.addEventListener("click", changeC);
     console.log(pic);
@@ -62,11 +81,12 @@ var initRadius = 10;
 
 // changes the circle color (secondary function)
 const changeC = function(e){
-  e.stopPropagation();
-  this.setAttribute("fill", fColor2);
-  this.addEventListener("click", sudoku);
-  this.removeEventListener("click", changeC);
-  console.log(pic);
+    e.stopPropagation();
+    //this.setAttribute("fill", fColor2);
+    this.setColor(fColor2);
+    this.addEventListener("click", sudoku);
+    this.removeEventListener("click", changeC);
+    console.log(pic);
 }
 
 // circle-san commites sudoku after shaming his new born family (final function)
@@ -86,3 +106,4 @@ const sudoku = function(e){
 pic.addEventListener("click", function(e){
   circle(e.offsetX, e.offsetY);
 })
+document.getElementById("clear").addEventListener("click", clear);
